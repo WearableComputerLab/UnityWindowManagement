@@ -9,6 +9,7 @@ If you directly use "AudioVisualization" as the path, it may cause path errors.
 
 To open this tool, we need to find the **Main** scene in the scene folder and open it.
 
+
 **Overview**
 
 The project is a capture window management tool based on unity, which can realize window capture and interaction. The potential application scenarios of the project include corporate projection, teaching research, military training, etc. Therefore, the design of the project should comprehensively consider the user-friendliness of different types of users. Therefore, in addition to stable and reliable functions, the design principles of the project should also consider simplicity Clear user interface, easy-to-operate use process and appropriate interactive feedback.
