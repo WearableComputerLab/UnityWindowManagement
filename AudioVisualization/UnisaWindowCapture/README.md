@@ -1,4 +1,4 @@
-**The project is based on two mature github and rewrite some functions：**
+**The project is based on two mature github projects and rewrite some functions：**
 1. https://github.com/hecomi/uWindowCapture
 2.  https://github.com/cfloutier/Unity-VNC-Client
 
