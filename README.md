@@ -2,7 +2,7 @@
 
 
 
-The project is based on two mature github and rewrite some functions：
+The project is based on two mature github projects and rewrite some functions：
 
 https://github.com/hecomi/uWindowCapture
 
