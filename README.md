@@ -30,8 +30,13 @@ When the user is ready to project a window, please ensure that the window in the
 Before performing the operation of VNC remote connection, please make sure that **TightVNC Server** is running on the target device.  
 Learn more about tightVNC at https://www.tightvnc.com/  
 
-
 User need to rename every time user add a new window and ensure that the names of the added windows are not repeated. The recognition and operation of windows (such as switching, deleting, etc.) are based on the new name of the window.  
+
+Scripts in our work is mainly in the following locations:   
+1.Assets/Scripts  
+2.Assets/UnisaWindowCapture/scripts  
+The purpose and comments of each script are described in the script. Some scripts are in the form of "xxx.designer", which aims to display public parameters in the inspector.  
+
 
 ## Remark  
 Unity version: **Unity2020.3.16f1c1 Personal**  
