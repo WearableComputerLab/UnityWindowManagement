@@ -1,0 +1,31 @@
+ManifestFileVersion: 0
+CRC: 2123198353
+AssetBundleManifest:
+  AssetBundleInfos:
+    Info_0:
+      Name: testimage_png
+      Dependencies: {}
+    Info_1:
+      Name: uipopwindowslistpanel_prefab
+      Dependencies: {}
+    Info_2:
+      Name: uilefttabpanel_prefab
+      Dependencies: {}
+    Info_3:
+      Name: sceneres_unity
+      Dependencies: {}
+    Info_4:
+      Name: textureexample1_png
+      Dependencies: {}
+    Info_5:
+      Name: battlescene_unity
+      Dependencies: {}
+    Info_6:
+      Name: assetobj_prefab
+      Dependencies: {}
+    Info_7:
+      Name: uimultipanel_prefab
+      Dependencies: {}
+    Info_8:
+      Name: spriteatlas_spriteatlas
+      Dependencies: {}

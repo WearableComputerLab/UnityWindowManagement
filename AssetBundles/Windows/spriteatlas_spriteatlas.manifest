@@ -1,0 +1,21 @@
+ManifestFileVersion: 0
+CRC: 3037664155
+Hashes:
+  AssetFileHash:
+    serializedVersion: 2
+    Hash: 81eab175d0237356db20ff6aa91d30d0
+  TypeTreeHash:
+    serializedVersion: 2
+    Hash: 7c2540343e88b2e84dfdbf2d12e7f16d
+HashAppended: 0
+ClassTypes:
+- Class: 28
+  Script: {instanceID: 0}
+- Class: 213
+  Script: {instanceID: 0}
+- Class: 687078895
+  Script: {instanceID: 0}
+SerializeReferenceClassIdentifiers: []
+Assets:
+- Assets/QFramework/Toolkits/ResKit/Example/5.LoadSpriteAtlasExample/spriteatlas.spriteatlas
+Dependencies: []
