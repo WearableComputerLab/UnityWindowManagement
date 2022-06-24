@@ -17,8 +17,8 @@ About some event-driven and UI:
 https://github.com/liangxiegame/QFramework
 
 ## How to use  
-After entering the project, please find and open the scene **"UniSAWindowCapture"** to run the project. We recommend that you set the window display to "2 by 3"(Window/Layouts/2 by 3) and adjust the size of the Game window appropriately.  
-<img src="https://github.com/WearableComputerLab/UnityWindowManagement/blob/UwcVersion_2022/1.png" width="375">    
+After entering the project, please find and open the scene **"UniSAWindowCapture"** to run the project. We recommend that you set the window display to "2 by 3"(Window/Layouts/2 by 3) and adjust the size of the Game window appropriately.If the buttons in the main interface are large, it is because the default interface will be maintained when the project is first opened with unity after downloading, it may be deformed after adjusting to "2 by 3". We can adjust the size appropriately (the above effects are limited to the three buttons in the main interface).  
+<img src="https://github.com/WearableComputerLab/UnityWindowManagement/blob/UwcVersion_2022/1.png" width="375">  
 Please click the following link to open the running demonstration of this project: https://github.com/WearableComputerLab/UnityWindowManagement/issues/1 
 
 ## Running precautions  
@@ -29,6 +29,7 @@ When the user is ready to project a window, please ensure that the window in the
 
 Before performing the operation of VNC remote connection, please make sure that **TightVNC Server** is running on the target device.  
 Learn more about tightVNC at https://www.tightvnc.com/  
+
 
 User need to rename every time user add a new window and ensure that the names of the added windows are not repeated. The recognition and operation of windows (such as switching, deleting, etc.) are based on the new name of the window.  
 
@@ -42,6 +43,7 @@ The following project may be helpful for dynamic cropping: https://github.com/he
 If the window cannot be displayed normally and an error about the GPU appears when running the above project,can try to turn off the discrete graphics card and use the integrated display, and then restart the project to solve the problem.
 
 ## Contact us
+If have any questions in the process of using the project, please leave a message at at **issues** or contact us  
 huazy041@mymail.unisa.edu.au
 
 
