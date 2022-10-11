@@ -19,6 +19,7 @@ namespace CubeWindow
         Vector3 target;
         GameObject _curGameObject;
         public List<Vector3> vertices = new List<Vector3>();
+        public List<GameObject> spheres = new List<GameObject>();
         public int count = 0;
         
         private void Start()
@@ -62,7 +63,7 @@ namespace CubeWindow
 
                     Quaternion rot = new Quaternion(0, 0, 0, 0);//Get the coordinates of the mouse ray
                     GameObject tag = GameObject.Instantiate(clickTag, target, rot) as GameObject;//A small red dot appears at the collision location,
-
+                    spheres.Add(tag);
                     vertices.Add(tag.transform.position);
                     count++;//Count the number of collisions with the little red dot.
 
