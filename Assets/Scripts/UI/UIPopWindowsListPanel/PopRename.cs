@@ -9,6 +9,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using QFramework;
 using uWindowCapture;
+using CubeWindow;
 
 //This script is used to control the rename panel.
 
@@ -18,8 +19,10 @@ namespace QFramework.Example
 	{
 		public UwcWindow window;
 		public Texture2D texture2D;
+		public MouseRay mouseRay;
 		private void Awake()//Implementation of window renaming function
 		{
+			mouseRay = Camera.main.GetComponent<MouseRay>();
 			Button.onClick.AddListener(() =>//is the function of the ok button
 			{
 				//window.title = InputHereName.text;
@@ -39,6 +42,11 @@ namespace QFramework.Example
 				TypeEventSystem.Global.Send<EventChangeDisPlayMatTexture>(new EventChangeDisPlayMatTexture(){windowName = InputHereName.text,texture2D = window.texture,Window = this.window});
 				//Sending this event (in the createnewmeshcontrol script) will pass the selected window to the uwc windows of the cube on the right and the mesh on the left.
 				// UIKit.ClosePanel<UIPopWindowsListPanel>();
+				foreach(GameObject sphere in mouseRay.spheres)
+				{
+					Destroy(sphere);
+				}
+				
 				UIKit.GetPanel<UIPopWindowsListPanel>().Scale(Vector3.zero);//After clicking ok, the thumbnail is reduced to 0 and hidden.
 				gameObject.SetActive(false);
 			});

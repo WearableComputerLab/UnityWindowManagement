@@ -30,7 +30,7 @@ public class LoadThumbnail : MonoBehaviour
         {
             //Reduce the vector square by one thousandth.
             GameObject cube = GameObject.Find("MainCube");
-            cube.transform.localScale = new Vector3(1.92f, 1.08f, 0.999f);
+            cube.transform.localScale = new Vector3(0.999f, 0.999f, 0.999f); //(1.92f, 1.08f, 0.999f)
             Debug.Log(v.Count);
             CreateMesh(v[0],v[1],v[2],v[3],mat);
         }
