@@ -19,12 +19,17 @@ namespace CubeWindow
         Vector3 target;
         GameObject _curGameObject;
         public List<Vector3> vertices = new List<Vector3>();
+        public List<GameObject> screenObjects = new List<GameObject> ();
         public List<GameObject> spheres = new List<GameObject>();
         public int count = 0;
         
         private void Start()
         {
             TypeEventSystem.Global.Register<EventRestartMeshCreate>(OnRestartMeshCreateHandler);
+            foreach(GameObject ScrObj in GameObject.FindGameObjectsWithTag("ScreenObjects"))
+            {
+                screenObjects.Add(ScrObj);
+            }
         }
 
         private void OnRestartMeshCreateHandler(EventRestartMeshCreate obj)//Define the function of the addmore button
@@ -32,12 +37,15 @@ namespace CubeWindow
             vertices.Clear();
             count = 0;//Clear coordinates and counts
             canvas.gameObject.SetActive(true);
-            GameObject.Find("MainCube").transform.localScale=Vector3.one;//Show the three buttons in the lower right corner
-            Destroy(FindObjectOfType<CreateNewMeshCtrl>().gameObject);//Destroy the mesh, four points.
-            foreach (GameObject o in GameObject.FindGameObjectsWithTag("ClickTag"))
+            foreach (GameObject ScrObj in screenObjects)
+            { 
+                ScrObj.transform.localScale = new Vector3(1.92f, 1.08f, 0.999f);//Show the three buttons in the lower right corner... 
+            }
+           // Destroy(FindObjectOfType<CreateNewMeshCtrl>().gameObject);//Destroy the mesh, four points.
+            /*foreach (GameObject o in GameObject.FindGameObjectsWithTag("ClickTag"))
             {
                 Destroy(o.gameObject);
-            }
+            }*/
         }
 
         void Update()
@@ -62,7 +70,7 @@ namespace CubeWindow
                     _curGameObject = hit.transform.gameObject;
 
                     Quaternion rot = new Quaternion(0, 0, 0, 0);//Get the coordinates of the mouse ray
-                    GameObject tag = GameObject.Instantiate(clickTag, target, rot) as GameObject;//A small red dot appears at the collision location,
+                    GameObject tag = Instantiate(clickTag, target, rot);//A small red dot appears at the collision location,
                     spheres.Add(tag);
                     vertices.Add(tag.transform.position);
                     count++;//Count the number of collisions with the little red dot.
@@ -82,7 +90,6 @@ namespace CubeWindow
         private void OnDestroy()//addmore is defined here.
         {
             TypeEventSystem.Global.UnRegister<EventRestartMeshCreate>(OnRestartMeshCreateHandler);
-
         }
     }
 }

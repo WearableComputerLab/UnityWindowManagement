@@ -13,24 +13,27 @@ using QFramework.Example;
 public class LoadThumbnail : MonoBehaviour
 {
     public Material mat;
+    public MouseRay mouseRay;
 
     private void Awake()
     {
+        mouseRay = Camera.main.GetComponent<MouseRay>();
         //Open the Thumbnails panel.
         ResKit.Init();
         UIKit.Root.CanvasScaler.LogInfo();
        
     }
 
-    // Start is called before the first frame update. 
     public void OpenThumbnail()//Generate mesh, only for local windows.
     {
         List<Vector3> v = FindObjectOfType<MouseRay>().vertices;
         if (v.Count == 4)
         {
             //Reduce the vector square by one thousandth.
-            GameObject cube = GameObject.Find("MainCube");
-            cube.transform.localScale = new Vector3(0.999f, 0.999f, 0.999f); //(1.92f, 1.08f, 0.999f)
+            foreach(GameObject ScrObj in mouseRay.screenObjects)
+            {
+                ScrObj.transform.localScale = new Vector3(1.91f, 1.07f, 0.998f); //  (0.999f, 0.999f, 0.999f)
+            }
             Debug.Log(v.Count);
             CreateMesh(v[0],v[1],v[2],v[3],mat);
         }
