@@ -18,17 +18,22 @@ public static class CreatenewMeshHelper
             p4
         };
         int[] _triangles =
-        {
+        {           
             0, 1, 2,
-            2, 3, 0,
+            2, 3, 0  
         };
         if (uvs==null)
         {
-            uvs = new Vector2[]{
+           /* uvs = new Vector2[]{
                 new Vector2(0f, 0f),
                 new Vector2(0.0f, 1.0f),
                 new Vector2(1f, 1f),
-                new Vector2(1.0f, 0f)
+                new Vector2(1.0f, 0f)*/
+            uvs = new Vector2[]{
+            new Vector2(0, 0),
+            new Vector2(1, 0),
+            new Vector2(0, 1),
+            new Vector2(1, 1)
             };
         }
         //UV array
@@ -40,6 +45,14 @@ public static class CreatenewMeshHelper
             uv = uvs,
             triangles = _triangles,
         };
+     /*   Vector3[] normals = new Vector3[4]
+       {
+            -Vector3.forward,
+            -Vector3.forward,
+            -Vector3.forward,
+            -Vector3.forward
+       };
+        mesh.normals = normals;*/
         mesh.RecalculateNormals();
         
         GameObject go = new GameObject("plan");

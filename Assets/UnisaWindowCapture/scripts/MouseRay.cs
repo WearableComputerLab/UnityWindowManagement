@@ -37,11 +37,16 @@ namespace CubeWindow
             vertices.Clear();
             count = 0;//Clear coordinates and counts
             canvas.gameObject.SetActive(true);
+            foreach(GameObject plane in GameObject.FindGameObjectsWithTag("ScreenPlane"))
+            {
+                var texChange = plane.GetComponent<TextureChange>();
+                texChange.clicked = false;
+            }
             foreach (GameObject ScrObj in screenObjects)
             { 
                 ScrObj.transform.localScale = new Vector3(1.92f, 1.08f, 0.999f);//Show the three buttons in the lower right corner... 
             }
-           // Destroy(FindObjectOfType<CreateNewMeshCtrl>().gameObject);//Destroy the mesh, four points.
+           // Destroy(FindObjectOfType<CreateNewMeshCtrl>().gameObject);//Destroy the mesh, four points. ****Commented that line to be able to "Add" more screens not restart
             /*foreach (GameObject o in GameObject.FindGameObjectsWithTag("ClickTag"))
             {
                 Destroy(o.gameObject);
