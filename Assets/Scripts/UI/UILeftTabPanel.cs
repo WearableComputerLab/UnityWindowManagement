@@ -22,12 +22,16 @@ namespace QFramework.Example
 		{
 			mData = uiData as UILeftTabPanelData ?? new UILeftTabPanelData();//Create the left window
 
-			Button_ReStart.onClick.AddListener(() =>//It is the application of addmore (re-add a new window)
+			Button_AddMore.onClick.AddListener(() =>//It is the application of addmore (re-add a new window)
 			{
 				//reset selection
-				//RayComponent.Instance.ReStartClick();
+				//RayComponent.Instance.AddMoreClick();
 				TypeEventSystem.Global.Send<EventRestartMeshCreate>();
 			});
+			Button_Restart.onClick.AddListener(() =>
+			{
+                TypeEventSystem.Global.Send<EventRestartMeshCreate>();
+            });
 		}
 
 		

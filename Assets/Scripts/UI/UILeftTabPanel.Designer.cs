@@ -15,7 +15,8 @@ namespace QFramework.Example
 		[SerializeField]
 		public leftTabCell leftTabCell;
 		[SerializeField]
-		public UnityEngine.UI.Button Button_ReStart;
+		public Button Button_AddMore;
+		public Button Button_Restart;
 		
 		private UILeftTabPanelData mPrivateData = null;
 		
@@ -23,8 +24,8 @@ namespace QFramework.Example
 		{
 			Content = null;
 			leftTabCell = null;
-			Button_ReStart = null;
-			
+			Button_AddMore = null;
+			Button_Restart = null;
 			mData = null;
 		}
 		
