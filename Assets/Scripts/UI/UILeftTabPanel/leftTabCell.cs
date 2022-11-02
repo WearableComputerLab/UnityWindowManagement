@@ -64,6 +64,7 @@ namespace QFramework.Example
 			});
 			TypeEventSystem.Global.Register<EventCaptureDisPlay>(OnCaptureDisPlay);
 			TypeEventSystem.Global.Register<EventChangeDisPlayMatTexture>(OnChangeDisPlayMatTextureHandler);
+			
 		}
 
 		private void OnChangeDisPlayMatTextureHandler(EventChangeDisPlayMatTexture obj)

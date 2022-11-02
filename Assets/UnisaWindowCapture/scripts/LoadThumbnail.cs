@@ -16,7 +16,7 @@ public class LoadThumbnail : MonoBehaviour
     public Material mat;
     public MouseRay mouseRay;
     public Canvas controlCanvas;
-
+    public int meshCount = 1;
     private void Awake()
     {
         mouseRay = Camera.main.GetComponent<MouseRay>();
@@ -24,7 +24,6 @@ public class LoadThumbnail : MonoBehaviour
         //Open the Thumbnails panel.
         ResKit.Init();
         UIKit.Root.CanvasScaler.LogInfo();
-       
     }
 
     public void OpenThumbnail()//Generate mesh, only for local windows.
@@ -32,6 +31,7 @@ public class LoadThumbnail : MonoBehaviour
         List<Vector3> v = FindObjectOfType<MouseRay>().vertices;
         if (v.Count == 4)
         {
+            // Only if 4 point are instantiated can the "Confirm button" be clicked.
             controlCanvas.gameObject.SetActive(false);
             //Reduce the vector square by one thousandth.
             foreach (GameObject ScrObj in mouseRay.screenObjects)
@@ -44,7 +44,6 @@ public class LoadThumbnail : MonoBehaviour
         else
         {
             Debug.Log(v.Count);
-
         }
     }
 
@@ -60,13 +59,14 @@ public class LoadThumbnail : MonoBehaviour
 
         };
         
-        GameObject newMesh = CreatenewMeshHelper.CreateMeshBy4Point(p1,p2,p3,p4,mat,uvs);
-        
+        GameObject newMesh = CreatenewMeshHelper.CreateMeshBy4Point(p1,p2,p3,p4,mat,uvs);        
         newMesh.AddComponent<CreateNewMeshCtrl>();
         newMesh.AddComponent<BoxCollider>();
         newMesh.AddComponent<TextureChange>();
+        newMesh.name = "Plane" + meshCount;
         newMesh.tag = "ScreenPlane";
-        WindowListPop();
+        meshCount++;
+        WindowListPop();        
     }
     private void WindowListPop()//open thumbnail
     {
@@ -78,7 +78,6 @@ public class LoadThumbnail : MonoBehaviour
         {
             UIKit.OpenPanel<UIPopWindowsListPanel>();//Open the thumbnail if it doesn't exist.
         }
-            
     }   
 }
 

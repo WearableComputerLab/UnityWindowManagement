@@ -16,7 +16,7 @@ namespace QFramework.Example
 		public leftTabCell leftTabCell;
 		[SerializeField]
 		public Button Button_AddMore;
-		public Button Button_Restart;
+		public Button Button_Restart;		
 		
 		private UILeftTabPanelData mPrivateData = null;
 		

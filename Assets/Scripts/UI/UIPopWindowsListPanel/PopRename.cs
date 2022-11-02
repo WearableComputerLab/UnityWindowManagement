@@ -20,13 +20,17 @@ namespace QFramework.Example
 		public UwcWindow window;
 		public Texture2D texture2D;
 		public MouseRay mouseRay;
+		int n = 1;
 		private void Awake()//Implementation of window renaming function
-		{
-			mouseRay = Camera.main.GetComponent<MouseRay>();
+		{			
+			
+            mouseRay = Camera.main.GetComponent<MouseRay>();
 			Button.onClick.AddListener(() =>//is the function of the ok button
 			{
-				//window.title = InputHereName.text;
-				Debug.Log($"Rename Success {InputEnterName.text} to {InputHereName.text}");
+                Transform plane = GameObject.Find("Plane" + n).GetComponent<Transform>();
+				var texChange = plane.GetComponent<TextureChange>();
+                //window.title = InputHereName.text;
+                Debug.Log($"Rename Success {InputEnterName.text} to {InputHereName.text}");
 
 				UILeftTabPanel leftTabPanel = UIKit.GetPanel<UILeftTabPanel>();//Determine if the left panel exists
 				if (leftTabPanel)
@@ -44,9 +48,12 @@ namespace QFramework.Example
 				// UIKit.ClosePanel<UIPopWindowsListPanel>();
 				foreach(GameObject sphere in mouseRay.spheres)
 				{
-					Destroy(sphere);
+					sphere.transform.SetParent(plane);
+					texChange.sphereChildren.Add(sphere);
+					sphere.SetActive(false);					
 				}
-				
+				mouseRay.spheres.Clear();
+				n++;               
 				UIKit.GetPanel<UIPopWindowsListPanel>().Scale(Vector3.zero);//After clicking ok, the thumbnail is reduced to 0 and hidden.
 				gameObject.SetActive(false);
 			});

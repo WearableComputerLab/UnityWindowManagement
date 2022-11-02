@@ -34,9 +34,11 @@ namespace CubeWindow
 
         private void OnRestartMeshCreateHandler(EventRestartMeshCreate obj)//Define the function of the addmore button
         {
+            int timesClicked = 0;
             vertices.Clear();
             count = 0;//Clear coordinates and counts
-            canvas.gameObject.SetActive(true);
+            canvas.gameObject.SetActive(true);           
+            // Finding all screen objects in scene (currently by tag ("ScreenPlane")). 
             foreach(GameObject plane in GameObject.FindGameObjectsWithTag("ScreenPlane"))
             {
                 var texChange = plane.GetComponent<TextureChange>();
@@ -46,6 +48,7 @@ namespace CubeWindow
             { 
                 ScrObj.transform.localScale = new Vector3(1.92f, 1.08f, 0.999f);//Show the three buttons in the lower right corner... 
             }
+            timesClicked++;
            // Destroy(FindObjectOfType<CreateNewMeshCtrl>().gameObject);//Destroy the mesh, four points. ****Commented that line to be able to "Add" more screens not restart
             /*foreach (GameObject o in GameObject.FindGameObjectsWithTag("ClickTag"))
             {
@@ -55,7 +58,7 @@ namespace CubeWindow
 
         void Update()
         {
-            //When the left mouse button is pressed .       
+            //When the left mouse button is pressed.       
             if (Input.GetMouseButtonDown(0))
             {
 

@@ -13,14 +13,14 @@ namespace QFramework.Example
 		[SerializeField] public UnityEngine.UI.RawImage RawImg;
 		[SerializeField] public TMPro.TextMeshProUGUI Txtname;
 		[SerializeField] public UnityEngine.UI.Button BtnClose;
-		[SerializeField] public UnityEngine.UI.Button BtnCrop;
-
-		public void Clear()
+		[SerializeField] public UnityEngine.UI.Button BtnCrop;		
+        public void Clear()
 		{
 			RawImg = null;
 			Txtname = null;
 			BtnClose = null;
 			BtnCrop = null;
+		
 		}
 
 		public override string ComponentName
