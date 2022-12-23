@@ -8,11 +8,13 @@ using uWindowCapture;
 
 namespace QFramework.Example
 {
+	
 	public class UILeftTabPanelData : UIPanelData
 	{
 	}
 	public partial class UILeftTabPanel : UIPanel
 	{
+		
 		protected override void ProcessMsg(int eventId, QMsg msg)
 		{
 			throw new System.NotImplementedException();
@@ -30,7 +32,9 @@ namespace QFramework.Example
 			});
 			Button_Restart.onClick.AddListener(() =>
 			{
+				
                 TypeEventSystem.Global.Send<EventRestartMeshCreate>();
+
             });
 		}
 

@@ -20,7 +20,7 @@ namespace QFramework.Example
 		public UwcWindow window;
 		public Texture2D texture2D;
 		public MouseRay mouseRay;
-		int n = 1;
+		public int n = 1;
 		private void Awake()//Implementation of window renaming function
 		{			
 			
@@ -46,11 +46,15 @@ namespace QFramework.Example
 				TypeEventSystem.Global.Send<EventChangeDisPlayMatTexture>(new EventChangeDisPlayMatTexture(){windowName = InputHereName.text,texture2D = window.texture,Window = this.window});
 				//Sending this event (in the createnewmeshcontrol script) will pass the selected window to the uwc windows of the cube on the right and the mesh on the left.
 				// UIKit.ClosePanel<UIPopWindowsListPanel>();
-				foreach(GameObject sphere in mouseRay.spheres)
+				foreach(GameObject sphere in mouseRay.spheres) // Transferring the dots to become children of the new screen/plane GameObject.
 				{
 					sphere.transform.SetParent(plane);
 					texChange.sphereChildren.Add(sphere);
 					sphere.SetActive(false);					
+				}
+				foreach (GameObject sphere in texChange.sphereChildren)
+				{
+					texChange.newSphereVerts.Add(sphere.transform.position);
 				}
 				mouseRay.spheres.Clear();
 				n++;               
@@ -61,8 +65,15 @@ namespace QFramework.Example
 				gameObject.SetActive(false);
 			});
 		}
+        private void Update()
+        {
+            if(n<1)
+			{
+				n = 1;
+			}
+        }
 
-		public void Init( string windowName,Texture2D texture2D,UwcWindow window)//Initialize the cube and synchronize the contents of the selected window
+        public void Init( string windowName,Texture2D texture2D,UwcWindow window)//Initialize the cube and synchronize the contents of the selected window
 		{
 			this.window = window;
 			gameObject.SetActive(true);

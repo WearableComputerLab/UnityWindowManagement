@@ -106,15 +106,11 @@ public class CreateNewMeshCtrl : MonoBehaviour//Based on the mesh grid generated
                     
                 }
                 if (uwcWindow != null&& uwcWindow.texture)//if empty and has a material
-                {
-                    
+                {                    
                     _material.mainTexture = uwcWindow.texture;//directly into dynamic
-
                 }
-
                 time = timer;
             }
-           
         }
     }
 

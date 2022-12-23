@@ -16,7 +16,9 @@ public class LoadThumbnail : MonoBehaviour
     public Material mat;
     public MouseRay mouseRay;
     public Canvas controlCanvas;
-    public int meshCount = 1;
+   // public int meshCount = 1;
+    public CountKeeper countKeeper;
+   
     private void Awake()
     {
         mouseRay = Camera.main.GetComponent<MouseRay>();
@@ -24,8 +26,8 @@ public class LoadThumbnail : MonoBehaviour
         //Open the Thumbnails panel.
         ResKit.Init();
         UIKit.Root.CanvasScaler.LogInfo();
+        countKeeper = FindObjectOfType<CountKeeper>();
     }
-
     public void OpenThumbnail()//Generate mesh, only for local windows.
     {
         List<Vector3> v = FindObjectOfType<MouseRay>().vertices;
@@ -63,11 +65,12 @@ public class LoadThumbnail : MonoBehaviour
         newMesh.AddComponent<CreateNewMeshCtrl>();
         newMesh.AddComponent<BoxCollider>();
         newMesh.AddComponent<TextureChange>();
-        newMesh.name = "Plane" + meshCount;
+        newMesh.name = "Plane" + countKeeper.count;
         newMesh.tag = "ScreenPlane";
-        meshCount++;
+        countKeeper.count++;
         WindowListPop();        
     }
+   
     private void WindowListPop()//open thumbnail
     {
         if (UIKit.GetPanel<UIPopWindowsListPanel>())
