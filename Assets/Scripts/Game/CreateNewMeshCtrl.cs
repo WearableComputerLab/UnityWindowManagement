@@ -81,14 +81,13 @@ public class CreateNewMeshCtrl : MonoBehaviour//Based on the mesh grid generated
     {
         // Changed the way this works, to only change the texture of the selected plane(screen).///
         
-        if(textureChange.clicked)
-        {
+        
             //This event is sent when a thumbnail is selected.
             isDisplay = true;
             uwcWindow = obj.Window;//Synchronize the selected uwc window. (put to the right)
             windowname = obj.windowName;//The name of the synchronized window
             _material.mainTexture = obj.texture2D;//The texture of the synchronized window (the static texture is placed on the left)
-        }
+        
         
     }
     // Update is called once per frame
