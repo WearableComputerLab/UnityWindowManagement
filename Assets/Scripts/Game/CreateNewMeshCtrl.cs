@@ -19,6 +19,7 @@ public class CreateNewMeshCtrl : MonoBehaviour//Based on the mesh grid generated
     public float time=0;
     public float timer = 0.05f;//Next, determine the timer used in the dynamic picture. The screen of uwc windows will be synchronized every 0.05 seconds.
     private string windowname;
+
     void Start()
     {
         textureChange = gameObject.GetComponent<TextureChange>();
@@ -37,10 +38,10 @@ public class CreateNewMeshCtrl : MonoBehaviour//Based on the mesh grid generated
     }
     private void OnHideCubeWindowHander(EventHideCubeWindow obj)
     {
-        FindObjectOfType<CreateNewMeshCtrl>().gameObject.GetComponent<Renderer>().enabled = false;//Find the mesh, hide the mesh
+        FindObjectOfType<CreateNewMeshCtrl>().gameObject.GetComponent<Renderer>().DestroyGameObj();//Find the mesh, hide the mesh
         foreach (GameObject o in GameObject.FindGameObjectsWithTag("ClickTag"))//Find the balls and hide them one by one.
         {
-            o.gameObject.GetComponent<Renderer>().enabled = false;
+            o.gameObject.GetComponent<Renderer>().DestroyGameObj();
         }
     }
     //When switching, it is always displayed at the beginning.
@@ -80,15 +81,23 @@ public class CreateNewMeshCtrl : MonoBehaviour//Based on the mesh grid generated
     private void OnChangeDisPlayMatTextureHandler(EventChangeDisPlayMatTexture obj)//Synchronize the contents of the window; by changing the texture on the created mesh,
     {
         // Changed the way this works, to only change the texture of the selected plane(screen).///
-        
-        
+
+        //this code below diretly displays the window/texture over the mesh but applies the same texture to all the meshes
+        //This event is sent when a thumbnail is selected.
+        isDisplay = true;
+            uwcWindow = obj.Window;//Synchronize the selected uwc window. (put to the right)
+            windowname = obj.windowName;//The name of the synchronized window
+            _material.mainTexture = obj.texture2D;//The texture of the synchronized window (the static texture is placed on the left)
+
+        //this code below ask the user to select a window from the side menu and makes the user double click a mesh to display that window
+        /*if (textureChange.clicked)
+        {
             //This event is sent when a thumbnail is selected.
             isDisplay = true;
             uwcWindow = obj.Window;//Synchronize the selected uwc window. (put to the right)
             windowname = obj.windowName;//The name of the synchronized window
             _material.mainTexture = obj.texture2D;//The texture of the synchronized window (the static texture is placed on the left)
-        
-        
+        }*/
     }
     // Update is called once per frame
     void Update()//Because what is needed is a dynamic picture, a judgment is made here.
