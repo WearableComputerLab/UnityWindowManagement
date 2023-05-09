@@ -33,11 +33,14 @@ public class TextureChange : MonoBehaviour
         countKeeper = FindObjectOfType<CountKeeper>();
     }
     void Update()
-    {   
-        if(popRename == null)
+    {
+        // Checking if an instance of the PopRename class exists
+        if (popRename == null)
         {
             popRename= FindObjectOfType<PopRename>();
         }
+
+        // Updating the new sphere vertices if currently adjusting
         if (adjusting)
         {
             clicked = true;
@@ -46,6 +49,8 @@ public class TextureChange : MonoBehaviour
                 newSphereVerts[i] = sphereChildren[i].transform.position;
             }            
         }
+
+        // Adding a onclick listener to the adjust button if it exists
         if (adjustButton != null)
         {
             adjustButton.onClick.AddListener(() =>
@@ -55,6 +60,8 @@ public class TextureChange : MonoBehaviour
                     adjusting = true;
                     refreshed = false;
                     freeCam.enabled = false;
+
+                    // Moving the camera to a certain distance from the texture plane
                     Camera.main.transform.position = new Vector3(transform.position.x, transform.position.y, cameraDistance);                                        
                     foreach (GameObject sphere in sphereChildren)
                     {
@@ -65,6 +72,7 @@ public class TextureChange : MonoBehaviour
         }
         if (doneButton != null)
         {
+            // Adding a onclick listener to the adjust button if it exists
             doneButton.onClick.AddListener(() =>
             {
                 if (sphereChildren[0].activeInHierarchy)
@@ -74,6 +82,7 @@ public class TextureChange : MonoBehaviour
                         adjusting = false;
                         if (!refreshed)
                         {
+                            // Creating a new mesh with 4 vertices
                             Vector2[] uvs = new Vector2[]
                              {
                               new Vector2(0, 0),
@@ -81,6 +90,7 @@ public class TextureChange : MonoBehaviour
                               new Vector2(1, 1),
                               new Vector2(0, 1),
                              };
+                            // Adding components to the new mesh object
                             GameObject newMesh = CreatenewMeshHelper.RefreshMeshBy4Point(newSphereVerts[0], newSphereVerts[1], newSphereVerts[2], newSphereVerts[3], mat, uvs);
                             newMesh.AddComponent<CreateNewMeshCtrl>();
                             newMesh.AddComponent<BoxCollider>();
@@ -102,6 +112,7 @@ public class TextureChange : MonoBehaviour
                 }
             });
         }
+        // Checking if the mouse is hovering over the texture plane
         if (hovering)
         {
             if(Input.GetMouseButtonDown(0))
@@ -109,24 +120,32 @@ public class TextureChange : MonoBehaviour
                 clicked = true;
             }
         }
-        if(Input.GetMouseButtonDown(1))
+
+        // Checking if the right mouse button is pressed
+        if (Input.GetMouseButtonDown(1))
         {
             clicked = false;
         }
+
+        // Updating the clicked flag if left mouse button is pressed
         if (clicked)
         {
-            if(adjustButton == null)
+            // Finding the adjust button game object if it does not exist
+            if (adjustButton == null)
             {
                 adjustButton = GameObject.Find("Button_Adjust").GetComponent<Button>();
             }
+            // Finding the done button game object if it does not exist
             if (doneButton == null)
             {
                 doneButton = GameObject.Find("Button_Done").GetComponent<Button>();
                 
             }
+            // Casting a ray from the camera to the mouse position
             ray = Camera.main.ScreenPointToRay(Input.mousePosition);
             if (Physics.Raycast(ray, out hit))
             {
+                // Checking if the mouse is hovering or not and the colliding object is a screen plane
                 if (!hovering && hit.collider.CompareTag("ScreenPlane"))
                 {
                     if(Input.GetMouseButtonDown(0))
@@ -151,11 +170,14 @@ public class TextureChange : MonoBehaviour
             }       
             
         }
-    }   
+    }
+
+    // Called when the mouse enters the texture plane
     public void OnMouseEnter()
     {
         hovering = true;
     }
+    // Called when the mouse exits the texture plane
     private void OnMouseExit()
     {
         hovering = false;
