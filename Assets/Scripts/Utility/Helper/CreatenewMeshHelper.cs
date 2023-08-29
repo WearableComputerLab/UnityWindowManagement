@@ -45,8 +45,7 @@ public static class CreatenewMeshHelper
         mesh.RecalculateNormals();
         
         GameObject go = new GameObject("plane");
-        MirrorChange mirrorChange = go.AddComponent<MirrorChange>();
-        //go.transform.position = Vector3.zero;
+        go.transform.position = Vector3.zero;
         go.AddComponent<MeshFilter>().mesh = mesh;
         go.AddComponent<MeshRenderer>().material = mat;
 

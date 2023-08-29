@@ -102,13 +102,13 @@ public class CreateNewMeshCtrl : MonoBehaviour//Based on the mesh grid generated
         }
     }
 
-    private Rect GetWindowRect(IntPtr window)
-    {
-        WinAPI.RECT rect;
-        WinAPI.GetWindowRect(window, out rect);
+   // private Rect GetWindowRect(IntPtr window)
+    //{
+     //   WinAPI.RECT rect;
+      //  WinAPI.GetWindowRect(window, out rect);
 
-        return new Rect(rect.Left, rect.Top, rect.Right - rect.Left, rect.Bottom - rect.Top);
-    }
+    //    return new Rect(rect.Left, rect.Top, rect.Right - rect.Left, rect.Bottom - rect.Top);
+  //  }
 
 
     // Update is called once per frame
@@ -122,15 +122,8 @@ public class CreateNewMeshCtrl : MonoBehaviour//Based on the mesh grid generated
             if (Physics.Raycast(ray, out hit))
             {
                 Vector2 localPoint = hit.textureCoord;
-                Rect rect = GetWindowRect(WinAPI.GetForegroundWindow());
 
-                WinAPI.POINT point;
-                point.X = (int)(localPoint.x * rect.width);
-                point.Y = (int)(localPoint.y * rect.height);
-                WinAPI.ScreenToClient(WinAPI.GetForegroundWindow(), ref point);
 
-                WinAPI.SendMessage(WinAPI.GetForegroundWindow(), WinAPI.WM_LBUTTONDOWN, IntPtr.Zero, new IntPtr(point.Y * 0x10000 + point.X));
-                WinAPI.SendMessage(WinAPI.GetForegroundWindow(), WinAPI.WM_LBUTTONUP, IntPtr.Zero, new IntPtr(point.Y * 0x10000 + point.X));
             }
         }
 
