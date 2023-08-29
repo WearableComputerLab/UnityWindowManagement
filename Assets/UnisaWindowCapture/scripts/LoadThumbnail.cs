@@ -60,15 +60,33 @@ public class LoadThumbnail : MonoBehaviour
            new Vector2(0, 1),
 
         };
-        
-        GameObject newMesh = CreatenewMeshHelper.CreateMeshBy4Point(p1,p2,p3,p4,mat,uvs);        
+
+        GameObject newMesh = CreatenewMeshHelper.CreateMeshBy4Point(p1, p2, p3, p4, mat, uvs);
+
+        // Add a MeshCollider to the GameObject
+        MeshCollider meshCollider = newMesh.AddComponent<MeshCollider>();
+
+        // Get the MeshFilter
+        MeshFilter meshFilter = newMesh.GetComponent<MeshFilter>();
+
+        if (meshCollider != null && meshFilter != null)
+        {
+            meshCollider.sharedMesh = meshFilter.mesh;
+        }
+        else
+        {
+            Debug.LogError("MeshCollider or MeshFilter not found!");
+        }
+
+        // Add other components
         newMesh.AddComponent<CreateNewMeshCtrl>();
-        newMesh.AddComponent<BoxCollider>();
         newMesh.AddComponent<TextureChange>();
+        newMesh.AddComponent<DetectClick>();
         newMesh.name = "Plane" + countKeeper.count;
         newMesh.tag = "ScreenPlane";
         countKeeper.count++;
-        WindowListPop();        
+
+        WindowListPop();
     }
    
     private void WindowListPop()//open thumbnail

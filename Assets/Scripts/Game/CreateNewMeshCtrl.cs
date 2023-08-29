@@ -5,6 +5,8 @@ using Events;
 using UnityEngine;
 using QFramework;
 using uWindowCapture;
+using System.Runtime.InteropServices;
+
 
 // This script registers a series of events that will be used in other functional parts, especially in the thumbnail panel and the left panel.
 
@@ -84,24 +86,54 @@ public class CreateNewMeshCtrl : MonoBehaviour//Based on the mesh grid generated
 
         //this code below diretly displays the window/texture over the mesh but applies the same texture to all the meshes
         //This event is sent when a thumbnail is selected.
-        isDisplay = true;
-            uwcWindow = obj.Window;//Synchronize the selected uwc window. (put to the right)
-            windowname = obj.windowName;//The name of the synchronized window
-            _material.mainTexture = obj.texture2D;//The texture of the synchronized window (the static texture is placed on the left)
+       // isDisplay = true;
+        //    uwcWindow = obj.Window;//Synchronize the selected uwc window. (put to the right)
+         //   windowname = obj.windowName;//The name of the synchronized window
+         //   _material.mainTexture = obj.texture2D;//The texture of the synchronized window (the static texture is placed on the left)
 
         //this code below ask the user to select a window from the side menu and makes the user double click a mesh to display that window
-        /*if (textureChange.clicked)
+        if (textureChange.clicked)
         {
             //This event is sent when a thumbnail is selected.
             isDisplay = true;
             uwcWindow = obj.Window;//Synchronize the selected uwc window. (put to the right)
             windowname = obj.windowName;//The name of the synchronized window
             _material.mainTexture = obj.texture2D;//The texture of the synchronized window (the static texture is placed on the left)
-        }*/
+        }
     }
+
+    private Rect GetWindowRect(IntPtr window)
+    {
+        WinAPI.RECT rect;
+        WinAPI.GetWindowRect(window, out rect);
+
+        return new Rect(rect.Left, rect.Top, rect.Right - rect.Left, rect.Bottom - rect.Top);
+    }
+
+
     // Update is called once per frame
     void Update()//Because what is needed is a dynamic picture, a judgment is made here.
     {
+        if (Input.GetMouseButtonDown(0))
+        {
+            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+            RaycastHit hit;
+
+            if (Physics.Raycast(ray, out hit))
+            {
+                Vector2 localPoint = hit.textureCoord;
+                Rect rect = GetWindowRect(WinAPI.GetForegroundWindow());
+
+                WinAPI.POINT point;
+                point.X = (int)(localPoint.x * rect.width);
+                point.Y = (int)(localPoint.y * rect.height);
+                WinAPI.ScreenToClient(WinAPI.GetForegroundWindow(), ref point);
+
+                WinAPI.SendMessage(WinAPI.GetForegroundWindow(), WinAPI.WM_LBUTTONDOWN, IntPtr.Zero, new IntPtr(point.Y * 0x10000 + point.X));
+                WinAPI.SendMessage(WinAPI.GetForegroundWindow(), WinAPI.WM_LBUTTONUP, IntPtr.Zero, new IntPtr(point.Y * 0x10000 + point.X));
+            }
+        }
+
         if (isDisplay)//If it is in the mode without screenshots, synchronize the screen of the uwc window every 0.05s.
         {
             time -= Time.deltaTime;
