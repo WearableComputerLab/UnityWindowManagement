@@ -181,5 +181,5 @@ public class TextureChange : MonoBehaviour
     private void OnMouseExit()
     {
         hovering = false;
-    }  
+    }
 }

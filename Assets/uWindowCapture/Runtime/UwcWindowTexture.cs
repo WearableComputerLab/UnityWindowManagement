@@ -472,6 +472,37 @@ namespace uWindowCapture
                 hit = false,
             };
         }
+
+        //Function to capture a specific area of the window texture. This area is defined by the position and size of the cropping rectangle
+        public Texture2D CaptureCroppedArea(RectTransform cropRect)
+        {
+            // Get the current texture of the window. This represents the entire window's content.
+            Texture2D originalTexture = this.GetComponent<Texture2D>();
+
+            // Calculate the starting position of the cropped area.
+            // This is the bottom-left corner of the cropping rectangle.
+            Vector2Int startPos = new Vector2Int(Mathf.FloorToInt(cropRect.anchoredPosition.x), Mathf.FloorToInt(cropRect.anchoredPosition.y));
+
+            // Calculate the ending position of the cropped area.
+            // This is the top-right corner of the cropping rectangle.
+            Vector2Int endPos = startPos + new Vector2Int(Mathf.FloorToInt(cropRect.sizeDelta.x), Mathf.FloorToInt(cropRect.sizeDelta.y));
+
+            // Create a new texture that will store the cropped area.
+            // Its size is defined by the width and height of the cropping rectangle.
+            Texture2D croppedTexture = new Texture2D(endPos.x - startPos.x, endPos.y - startPos.y);
+
+            // Get the pixels from the original texture that lie within the cropping rectangle.
+            // Then, set these pixels to the cropped texture.
+            croppedTexture.SetPixels(originalTexture.GetPixels(startPos.x, startPos.y, endPos.x - startPos.x, endPos.y - startPos.y));
+
+            // Apply the changes to the cropped texture to finalize it.
+            croppedTexture.Apply();
+
+            // Return the cropped texture.
+            return croppedTexture;
+        }
+
+
     }
 
 }

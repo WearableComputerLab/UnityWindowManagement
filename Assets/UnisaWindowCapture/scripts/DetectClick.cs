@@ -102,7 +102,7 @@ namespace CubeWindow
                         }
                     }
                     else
-                    {
+                    { 
                         Debug.Log("Object not the targeted mesh / Vertex threshold exceeded");
                     }
                 }

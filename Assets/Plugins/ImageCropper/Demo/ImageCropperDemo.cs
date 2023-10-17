@@ -7,6 +7,8 @@ namespace ImageCropperNamespace
 	public class ImageCropperDemo : MonoBehaviour
 	{
 		public RawImage croppedImageHolder;
+		public Texture2D sourceTexture;
+		public Rect cropArea;
 		public Text croppedImageSize;
 
 		public Toggle ovalSelectionInput, autoZoomInput;
@@ -23,7 +25,37 @@ namespace ImageCropperNamespace
 
 		private IEnumerator TakeScreenshotAndCrop()
 		{
-			yield return new WaitForEndOfFrame();
+			while (true) // Continuously crop and update the texture
+			{
+				yield return new WaitForEndOfFrame();
+				CropAndUpdateTexture();
+			}
+		}
+		private void CropAndUpdateTexture()
+        {
+			// Make sure the crop area is within the bounds of the source texture
+			Debug.Log("cropped");
+            cropArea.x = Mathf.Clamp(cropArea.x, 0, sourceTexture.width - cropArea.width);
+
+            cropArea.y = Mathf.Clamp(cropArea.y, 0, sourceTexture.height - cropArea.height);
+
+			// Create a new texture to hold the cropped image
+			Texture2D croppedTexture = new Texture2D((int)cropArea.width, (int)cropArea.height);
+
+			// Get the pixel data from the source texture within the defined crop area
+			Color[] pixelData = sourceTexture.GetPixels((int)cropArea.x, (int)cropArea.y, (int)cropArea.width, (int)cropArea.height);
+
+			// Set the pixel data on the new cropped texture and apply
+			croppedTexture.SetPixels(pixelData);
+			croppedTexture.Apply();
+
+			// Update the RawImage to display the new cropped texture
+			croppedImageHolder.texture = croppedTexture;
+		}
+	}
+}
+
+/*		yield return new WaitForEndOfFrame();
 
 			bool ovalSelection = ovalSelectionInput.isOn;
 			bool autoZoom = autoZoomInput.isOn;
@@ -86,4 +118,4 @@ namespace ImageCropperNamespace
 			} );
 		}
 	}
-}
+}*/
